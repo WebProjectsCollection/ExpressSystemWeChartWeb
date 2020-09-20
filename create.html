@@ -1,0 +1,152 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>WECHAT_EMPTY_TITLE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <link href="http://www.hxyt56.cn/mobile/images/touch-icon.png" rel="apple-touch-icon-precomposed">
+    <link href="http://www.hxyt56.cn/mobile/images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="./themes/default/css/jiyun.css" rel="stylesheet" type="text/css">
+    <link href="./themes/default/css/new_0515.css" rel="stylesheet" type="text/css">
+    <link href="./themes/default/css/jiyun.css" rel="stylesheet" type="text/css">
+    <link href="./themes/default/css/new_0515.css" rel="stylesheet" type="text/css">
+    <style>
+        .resutlt-cloumn {
+            width: 100%;
+            padding: 2%;
+            background: #88cdfe;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body style="background-color: #ffffff;">
+    <div id="app">
+        <template>
+            <div class="wrap">
+                <div class="comx">
+                    <div class="navigation_bar">
+                        <a href="javascript:history.back();" class="navigation_bar_back">
+                            <img src="./themes/default/images/ico_goback.png" alt="">
+                        </a>
+                        <span class="navigation_bar_in">添加包裹</span>
+                    </div>
+
+                    <div id="add_package_1" class="add_package_01">
+                        <form name="formEdit" action="users.php" method="post" onsubmit="return checkadd();">
+                            <div class="modify_order">
+                                <table class="modify_order_01" cellpadding="10" cellspacing="10">
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                <span style="color:red">*</span>
+                                                快递单号</th>
+                                            <td>
+                                                <input v-model="model.orderNumber" type="text" value=""
+                                                    class="modify_order_01_in" placeholder="请输入快递单号（必填）"
+                                                    onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"
+                                                    onblur="get_post(this.value,'orderNumber','yxnum');">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>重量</th>
+                                            <td>
+                                                <input v-model="model.weight" type="text" value=""
+                                                    class="modify_order_01_in" placeholder="重量"
+                                                    onkeyup="value=value.replace(/[^\d.]/ig,'')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>寄件人姓名</th>
+                                            <td>
+                                                <input v-model="model.senderName" type="text" value=""
+                                                    class="modify_order_01_in" placeholder="寄件人姓名">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>寄件人电话</th>
+                                            <td>
+                                                <input v-model="model.senderPhone" type="text" value=""
+                                                    class="modify_order_01_in" placeholder="寄件人电话">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>寄件人地址</th>
+                                            <td>
+                                                <input v-model="model.senderAddress" type="text" value=""
+                                                    class="modify_order_01_in" placeholder="寄件人地址">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>津巴布韦姓名</th>
+                                            <td>
+                                                <input v-model="model.jbbwName" type="text" value=""
+                                                    class="modify_order_01_in" placeholder="津巴布韦姓名">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>津巴布韦电话</th>
+                                            <td>
+                                                <input v-model="model.jbbwPhone" type="text" value=""
+                                                    class="modify_order_01_in" placeholder="津巴布韦电话">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>津巴布韦地址</th>
+                                            <td>
+                                                <input v-model="model.jbbwAddress" type="text" value=""
+                                                    class="modify_order_01_in" placeholder="津巴布韦地址">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modify_order_07">
+                                <p>备注:</p>
+                                <textarea v-model="model.remarks" class="bein_text" placeholder="请输入备注"></textarea>
+                            </div>
+                            <div class="modify_order no_bg">
+                                <input type="button" value="提交" @click="submit" class="leave_message_07">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript" src="./scripts/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data() {
+            return {
+                model: {},
+                order_num: "",
+                tableData: []
+            }
+        },
+        methods: {
+            submit: function () {
+                axios.post('https://localhost:44395/api/order/AddNewOrder', this.model).then(res => {
+                    if (res.code == 100)
+                        this.$message({
+                            message: "添加成功",
+                            type: action,
+                        });
+                })
+            }
+        }
+    });
+</script>
