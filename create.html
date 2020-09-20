@@ -140,11 +140,11 @@
         methods: {
             submit: function () {
                 axios.post('http://www.code-data.cn/wechartapi/api/order/AddNewOrder', this.model).then(res => {
-                    if (res.code == 100)
-                        this.$message({
-                            message: "添加成功",
-                            type: action,
-                        });
+                    console.log(res)
+                    if (res.data.code == 100)
+                        alert("添加成功")
+                    else
+                        alert(res.data.msg)
                 })
             }
         }
