@@ -132,7 +132,7 @@
     methods: {
       handleSelect: function () {
         console.log(this.model)
-        axios.get('https://localhost:44395/api/order/GetOrderInfo', { params: this.model }).then(response => {
+        axios.get('http://www.code-data.cn/wechartapi/api/order/GetOrderInfo', { params: this.model }).then(response => {
           this.tableData = response.data.data.list;
           if (this.tableData.length > 0)
             this.info_flag = false;

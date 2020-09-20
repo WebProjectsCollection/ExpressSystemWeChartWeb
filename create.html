@@ -139,7 +139,7 @@
         },
         methods: {
             submit: function () {
-                axios.post('https://localhost:44395/api/order/AddNewOrder', this.model).then(res => {
+                axios.post('http://www.code-data.cn/wechartapi/api/order/AddNewOrder', this.model).then(res => {
                     if (res.code == 100)
                         this.$message({
                             message: "添加成功",
